@@ -14,34 +14,40 @@ function Ranking({ onClose }) {
     if (!seconds || seconds === Infinity) return "--:--";
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   const currentRankings = Object.entries(rankings)
     .filter(([key]) => key.includes(`-fase${selectedPhase}`))
-    .map(([key, time]) => ({ name: key.split('-')[0], time }))
+    .map(([key, time]) => ({ name: key.split("-")[0], time }))
     .sort((a, b) => a.time - b.time)
     .slice(0, 10);
 
   const getMedal = (index) => {
-    if (index === 0) return '🥇';
-    if (index === 1) return '🥈';
-    if (index === 2) return '🥉';
+    if (index === 0) return "🥇";
+    if (index === 1) return "🥈";
+    if (index === 2) return "🥉";
     return `#${index + 1}`;
   };
 
   return (
     <div className="ranking-modal" onClick={onClose}>
-      <div className="ranking-content" onClick={e => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}>✕</button>
-        
+      <div className="ranking-content" onClick={(e) => e.stopPropagation()}>
+        <button className="close-btn" onClick={onClose}>
+          ✕
+        </button>
+
         <h2>🏆 RANKING DA FLORESTA 🏆</h2>
-        
+
         <div className="phase-selector">
-          {[1, 2, 3, 4, 5].map(phase => (
+          {[1, 2, 3, 4, 5].map((phase) => (
             <button
               key={phase}
-              className={`phase-btn ${selectedPhase === phase ? 'active' : ''}`}
+              className={`phase-btn ${
+                selectedPhase === phase ? "active" : ""
+              }`}
               onClick={() => setSelectedPhase(phase)}
             >
               Fase {phase}
@@ -51,17 +57,28 @@ function Ranking({ onClose }) {
 
         <div className="ranking-table">
           <div className="ranking-header">
-            <span>Posição</span>
-            <span>Jogador</span>
-            <span>Tempo</span>
+            <span className="col-position">Posição</span>
+            <span className="col-name">Jogador</span>
+            <span className="col-time">Tempo</span>
           </div>
 
           {currentRankings.length > 0 ? (
             currentRankings.map((player, index) => (
-              <div key={index} className={`ranking-row ${index < 3 ? `top-${index + 1}` : ''}`}>
-                <span className="position">{getMedal(index)}</span>
-                <span className="player-name">{player.name}</span>
-                <span className="player-time">{formatTime(player.time)}</span>
+              <div
+                key={index}
+                className={`ranking-row ${
+                  index < 3 ? `top-${index + 1}` : ""
+                }`}
+              >
+                <span className="col-position">
+                  {getMedal(index)}
+                </span>
+                <span className="col-name">
+                  {player.name}
+                </span>
+                <span className="col-time">
+                  {formatTime(player.time)}
+                </span>
               </div>
             ))
           ) : (

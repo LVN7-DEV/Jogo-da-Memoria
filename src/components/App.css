@@ -510,8 +510,14 @@ h1, h2, h3, h4, h5, h6, p, span, button, div, input {
 }
 
 /* Modal de ranking */
-.ranking-content { 
-  border: 4px solid #d9a066; 
+.ranking-content {
+  width: 95vw;
+  max-width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.ranking-table {
+  width: 100%;
 }
 .ranking-content h2 {
   font-size: clamp(1.3rem, 5vw, 1.6rem); 
@@ -558,23 +564,45 @@ h1, h2, h3, h4, h5, h6, p, span, button, div, input {
   overflow: hidden; 
   margin-bottom: 20px;
 }
-.ranking-header, .ranking-row {
-  display: grid; 
-  grid-template-columns: 80px 1fr 100px; 
-  padding: 12px 15px;
-}
-.ranking-header {
-  background: rgba(255,215,0,0.2); 
-  color: #ffd700;
-  border-bottom: 2px solid #d9a066; 
-  font-size: 1rem;
-  font-weight: 600;
-}
+
+.ranking-header,
 .ranking-row {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  transition: background 0.3s; 
-  font-size: 0.95rem;
-  font-weight: 400;
+  display: grid;
+  grid-template-columns: 48px 1fr 72px;
+  align-items: center;
+  padding: 10px 14px;
+  column-gap: 8px;
+}
+
+.col-position {
+  text-align: center;
+}
+
+.col-name {
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.col-time {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+/* Alinhamento correto */
+.position {
+  text-align: center;
+}
+
+.player-name {
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-time {
+  text-align: right;
 }
 .ranking-row:active { 
   background: rgba(255,255,255,0.1); 
@@ -1010,4 +1038,10 @@ input, select, textarea {
   .front, .back {
     border-radius: 6px;
   }
+}
+
+.position {
+  margin-right: 12px;
+  min-width: 40px;
+  display: inline-block;
 }
