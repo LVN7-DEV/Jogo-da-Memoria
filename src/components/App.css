@@ -1045,3 +1045,15 @@ input, select, textarea {
   min-width: 40px;
   display: inline-block;
 }
+
+/* Ajuste somente para WEB */
+@media (min-width: 768px) {
+  .ranking-header,
+  .ranking-row {
+    column-gap: 20px; /* aumenta o espaço entre as colunas */
+  }
+
+  .col-position {
+    padding-right: 10px; /* garante respiro extra */
+  }
+}
