@@ -112,7 +112,7 @@ function App() {
         </div>
 
         <div className="menu-footer">
-          <p>🌿 5 fases · 30 personagens · Curiosidades educativas 🌿</p>
+          <p>🌿 5 fases · 25 personagens · Curiosidades educativas 🌿</p>
         </div>
       </div>
 
