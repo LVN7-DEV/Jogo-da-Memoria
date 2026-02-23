@@ -571,7 +571,7 @@ h1, h2, h3, h4, h5, h6, p, span, button, div, input {
   grid-template-columns: 48px 1fr 72px;
   align-items: center;
   padding: 10px 14px;
-  column-gap: 8px;
+  column-gap: 14px;
 }
 
 .col-position {
