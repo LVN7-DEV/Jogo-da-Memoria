@@ -6,11 +6,11 @@ function Ranking({ onClose }) {
   const [selectedPhase, setSelectedPhase] = useState(1);
 
   // FUNÇÃO: useEffect (carregar rankings)
-  // Carrega os rankings salvos do localStorage quando o componente é montado
+  // Carrega os rankings salvos do sessionStorage quando o componente é montado
   useEffect(() => {
-    const saved = localStorage.getItem("folcloreRankings");
-    if (saved) setRankings(JSON.parse(saved));
-  }, []);
+  const saved = sessionStorage.getItem("folcloreRankings");
+  if (saved) setRankings(JSON.parse(saved));
+}, []);
 
   // FUNÇÃO: formatTime
   // Formata os segundos no formato mm:ss para exibição no ranking

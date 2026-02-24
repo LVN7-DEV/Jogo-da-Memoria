@@ -154,19 +154,19 @@ function Game({ onBackToMenu }) {
   const timerRef = useRef(null);
 
   // FUNÇÃO: useEffect (carregar rankings)
-  // Carrega rankings salvos do localStorage ao iniciar
-  useEffect(() => {
-    const savedRankings = localStorage.getItem("folcloreRankings");
-    if (savedRankings) setPlayerRecords(JSON.parse(savedRankings));
-  }, []);
+  // Carrega rankings salvos do sessionStorage ao iniciar
+useEffect(() => {
+  const savedRankings = sessionStorage.getItem("folcloreRankings");
+  if (savedRankings) setPlayerRecords(JSON.parse(savedRankings));
+}, []);
 
   // FUNÇÃO: useEffect (salvar rankings)
-  // Salva rankings no localStorage sempre que houver mudança
-  useEffect(() => {
-    if (Object.keys(playerRecords).length) {
-      localStorage.setItem("folcloreRankings", JSON.stringify(playerRecords));
-    }
-  }, [playerRecords]);
+  // Salva rankings no sessionStorage sempre que houver mudança
+useEffect(() => {
+  if (Object.keys(playerRecords).length > 0) {
+    sessionStorage.setItem("folcloreRankings", JSON.stringify(playerRecords));
+  }
+}, [playerRecords]);
 
   // FUNÇÃO: useEffect (preview mode)
   // Controla o tempo de preview inicial (3 segundos)
