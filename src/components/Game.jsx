@@ -89,7 +89,8 @@ const curiosidadesPorFase = {
   }
 };
 
-// Funções auxiliares
+// FUNÇÃO: shuffle
+// Embaralha o array de cartas aleatoriamente
 function shuffle(array) {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
@@ -99,6 +100,8 @@ function shuffle(array) {
   return newArray;
 }
 
+// FUNÇÃO: generateCards
+// Gera as cartas para a fase atual baseado no level
 function generateCards(level) {
   const pairsPerLevel = { 1: 3, 2: 4, 3: 5, 4: 6, 5: 7 };
   const pairs = pairsPerLevel[level] || 3;
@@ -118,7 +121,8 @@ function generateCards(level) {
   }));
 }
 
-// Função para formatar o tempo (mm:ss)
+// FUNÇÃO: formatTime
+// Formata os segundos no formato mm:ss
 const formatTime = (seconds) => {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
@@ -149,20 +153,23 @@ function Game({ onBackToMenu }) {
   const victorySoundRef = useRef(null);
   const timerRef = useRef(null);
 
-  // Carregar rankings do localStorage
+  // FUNÇÃO: useEffect (carregar rankings)
+  // Carrega rankings salvos do localStorage ao iniciar
   useEffect(() => {
     const savedRankings = localStorage.getItem("folcloreRankings");
     if (savedRankings) setPlayerRecords(JSON.parse(savedRankings));
   }, []);
 
-  // Salvar rankings no localStorage
+  // FUNÇÃO: useEffect (salvar rankings)
+  // Salva rankings no localStorage sempre que houver mudança
   useEffect(() => {
     if (Object.keys(playerRecords).length) {
       localStorage.setItem("folcloreRankings", JSON.stringify(playerRecords));
     }
   }, [playerRecords]);
 
-  // Preview mode
+  // FUNÇÃO: useEffect (preview mode)
+  // Controla o tempo de preview inicial (3 segundos)
   useEffect(() => {
     if (!previewMode) return;
     const timeout = setTimeout(() => {
@@ -172,7 +179,8 @@ function Game({ onBackToMenu }) {
     return () => clearTimeout(timeout);
   }, [previewMode]);
 
-  // Timer
+  // FUNÇÃO: useEffect (timer)
+  // Gerencia o cronômetro do jogo
   useEffect(() => {
     if (isTimerActive) {
       timerRef.current = setInterval(() => setTimer(prev => prev + 1), 1000);
@@ -180,7 +188,8 @@ function Game({ onBackToMenu }) {
     return () => timerRef.current && clearInterval(timerRef.current);
   }, [isTimerActive]);
 
-  // Sons de efeito
+  // FUNÇÃO: useEffect (sons)
+  // Carrega os arquivos de som ao iniciar o componente
   useEffect(() => {
     matchSoundRef.current = new Audio("/sounds/acerto.mp3");
     matchSoundRef.current.volume = 0.6;
@@ -188,6 +197,8 @@ function Game({ onBackToMenu }) {
     victorySoundRef.current.volume = 0.7;
   }, []);
 
+  // FUNÇÃO: playSound
+  // Toca um som se os efeitos estiverem habilitados
   const playSound = (soundRef) => {
     if (soundRef.current && soundEffectsEnabled) {
       soundRef.current.currentTime = 0;
@@ -195,6 +206,8 @@ function Game({ onBackToMenu }) {
     }
   };
 
+  // FUNÇÃO: handleStartGame
+  // Inicia o jogo após validar o nome do jogador
   const handleStartGame = () => {
     if (!playerName.trim()) {
       alert("Por favor, digite seu nome!");
@@ -204,6 +217,8 @@ function Game({ onBackToMenu }) {
     setPreviewMode(true);
   };
 
+  // FUNÇÃO: handleFlip
+  // Gerencia a lógica de virar cartas, verificar pares e vitória
   const handleFlip = useCallback((card) => {
     if (lock || card.flipped || card.matched || previewMode) return;
 
@@ -261,6 +276,8 @@ function Game({ onBackToMenu }) {
     }, 500);
   }, [cards, lock, selected, level, timer, playerRecords, playerName, previewMode, soundEffectsEnabled]);
 
+  // FUNÇÃO: nextLevel
+  // Avança para a próxima fase ou reinicia o jogo
   const nextLevel = useCallback(() => {
     const next = level >= 5 ? 1 : level + 1;
     setLevel(next);
@@ -274,6 +291,8 @@ function Game({ onBackToMenu }) {
     setIsTimerActive(false);
   }, [level]);
 
+  // FUNÇÃO: resetGame
+  // Reinicia o jogo para a fase 1
   const resetGame = useCallback(() => {
     setLevel(1);
     setCards(generateCards(1));

@@ -5,11 +5,15 @@ function Ranking({ onClose }) {
   const [rankings, setRankings] = useState({});
   const [selectedPhase, setSelectedPhase] = useState(1);
 
+  // FUNÇÃO: useEffect (carregar rankings)
+  // Carrega os rankings salvos do localStorage quando o componente é montado
   useEffect(() => {
     const saved = localStorage.getItem("folcloreRankings");
     if (saved) setRankings(JSON.parse(saved));
   }, []);
 
+  // FUNÇÃO: formatTime
+  // Formata os segundos no formato mm:ss para exibição no ranking
   const formatTime = (seconds) => {
     if (!seconds || seconds === Infinity) return "--:--";
     const mins = Math.floor(seconds / 60);
@@ -19,12 +23,16 @@ function Ranking({ onClose }) {
       .padStart(2, "0")}`;
   };
 
+  // FUNÇÃO: currentRankings (lógica)
+  // Filtra os rankings pela fase selecionada, ordena por tempo e pega os 10 melhores
   const currentRankings = Object.entries(rankings)
     .filter(([key]) => key.includes(`-fase${selectedPhase}`))
     .map(([key, time]) => ({ name: key.split("-")[0], time }))
     .sort((a, b) => a.time - b.time)
     .slice(0, 10);
 
+  // FUNÇÃO: getMedal
+  // Retorna a medalha correspondente à posição (🥇🥈🥉 ou número)
   const getMedal = (index) => {
     if (index === 0) return "🥇";
     if (index === 1) return "🥈";

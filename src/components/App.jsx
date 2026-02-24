@@ -31,12 +31,24 @@ function App() {
     Object.fromEntries(legends.map(l => [l.id, false]))
   );
 
+  // FUNÇÃO: handleStartGame
+  // Alterna a tela atual para o jogo
   const handleStartGame = () => setCurrentScreen("game");
+
+  // FUNÇÃO: handleBackToMenu
+  // Retorna para o menu principal
   const handleBackToMenu = () => setCurrentScreen("menu");
+
+  // FUNÇÃO: openVideo
+  // Abre o modal de vídeo da lenda selecionada
   const openVideo = (id) => setVideoOpen(prev => ({ ...prev, [id]: true }));
+
+  // FUNÇÃO: closeVideo
+  // Fecha o modal de vídeo
   const closeVideo = (id) => setVideoOpen(prev => ({ ...prev, [id]: false }));
 
-  // Elementos decorativos reutilizáveis
+  // FUNÇÃO: Decorations (componente)
+  // Renderiza todos os elementos decorativos da floresta (animais, insetos, etc.)
   const Decorations = () => (
     <>
       {/* Animais */}
@@ -65,6 +77,8 @@ function App() {
     </>
   );
 
+  // FUNÇÃO: renderMenu
+  // Renderiza a tela principal do menu com todas as opções
   const renderMenu = () => (
     <div className="forest-menu">
       <button onClick={toggleMusic} className="music-corner-btn">

@@ -1,4 +1,3 @@
-// src/contexts/MusicContext.jsx
 import { createContext, useContext, useRef, useState, useEffect, useCallback } from 'react';
 
 const MusicContext = createContext({});
@@ -8,7 +7,8 @@ export function MusicProvider({ children }) {
   const [soundEffectsEnabled, setSoundEffectsEnabled] = useState(true);
   const backgroundMusicRef = useRef(null);
 
-  // Inicializar áudio apenas uma vez
+  // FUNÇÃO: useEffect (inicializar áudio)
+  // Cria o elemento de áudio da música de fundo e configura loop/volume
   useEffect(() => {
     const audio = new Audio("/sounds/floresta.mp3");
     audio.loop = true;
@@ -23,6 +23,8 @@ export function MusicProvider({ children }) {
     };
   }, []);
 
+  // FUNÇÃO: toggleMusic
+  // Alterna entre play/pause da música de fundo
   const toggleMusic = useCallback(() => {
     if (!backgroundMusicRef.current) return;
     
@@ -34,6 +36,8 @@ export function MusicProvider({ children }) {
     setIsMusicPlaying(prev => !prev);
   }, [isMusicPlaying]);
 
+  // FUNÇÃO: toggleSoundEffects
+  // Ativa/desativa os efeitos sonoros do jogo
   const toggleSoundEffects = useCallback(() => {
     setSoundEffectsEnabled(prev => !prev);
   }, []);
@@ -52,6 +56,8 @@ export function MusicProvider({ children }) {
   );
 }
 
+// FUNÇÃO: useMusic (hook personalizado)
+// Hook para acessar o contexto de música em qualquer componente
 export function useMusic() {
   const context = useContext(MusicContext);
   if (!context || Object.keys(context).length === 0) {

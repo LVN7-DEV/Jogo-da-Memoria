@@ -32,7 +32,6 @@ html, body {
   overflow: hidden;
 }
 
-/* Garantir Poppins em todos os elementos */
 h1, h2, h3, h4, h5, h6, p, span, button, div, input {
   font-family: 'Kabel Heavy', sans-serif;
 }
@@ -1050,10 +1049,10 @@ input, select, textarea {
 @media (min-width: 768px) {
   .ranking-header,
   .ranking-row {
-    column-gap: 20px; /* aumenta o espaço entre as colunas */
+    column-gap: 20px; 
   }
 
   .col-position {
-    padding-right: 10px; /* garante respiro extra */
+    padding-right: 10px; 
   }
 }
