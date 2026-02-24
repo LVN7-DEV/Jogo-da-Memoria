@@ -106,7 +106,7 @@ function App() {
             <span className="title-text">JOGO DA MEMÓRIA</span>
             <span className="title-icon">🌳</span>
           </h1>
-          <h2 className="subtitle">LENDAS DA AMAZÔNIA</h2>
+          <h2 className="subtitle">FOLCLORE BRASILEIRO</h2>
         </div>
 
         <div className="menu-quote">
